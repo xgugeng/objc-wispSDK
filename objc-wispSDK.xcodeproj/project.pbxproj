@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6647E602005244EFCC1B8567 /* libPods-objc-wispSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B8CB6D988628B43C8C24B6 /* libPods-objc-wispSDK.a */; };
-		AF439FEE1DB87C440039E885 /* CLLocationManager+Simulator.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FDB1DB87C440039E885 /* CLLocationManager+Simulator.m */; settings = {ASSET_TAGS = (); }; };
 		AF439FEF1DB87C440039E885 /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FDD1DB87C440039E885 /* NSData+GZIP.m */; settings = {ASSET_TAGS = (); }; };
 		AF439FF01DB87C440039E885 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FDF1DB87C440039E885 /* Reachability.m */; settings = {ASSET_TAGS = (); }; };
 		AF439FF11DB87C440039E885 /* WISPLocationMgrDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FE11DB87C440039E885 /* WISPLocationMgrDelegate.m */; settings = {ASSET_TAGS = (); }; };
@@ -35,8 +34,6 @@
 /* Begin PBXFileReference section */
 		13A727D97BDCEE17ECFC42EB /* Pods-objc-wispSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objc-wispSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-objc-wispSDK/Pods-objc-wispSDK.release.xcconfig"; sourceTree = "<group>"; };
 		AF439FCE1DB87B700039E885 /* libobjc-wispSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libobjc-wispSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AF439FDA1DB87C440039E885 /* CLLocationManager+Simulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocationManager+Simulator.h"; sourceTree = "<group>"; };
-		AF439FDB1DB87C440039E885 /* CLLocationManager+Simulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocationManager+Simulator.m"; sourceTree = "<group>"; };
 		AF439FDC1DB87C440039E885 /* NSData+GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+GZIP.h"; sourceTree = "<group>"; };
 		AF439FDD1DB87C440039E885 /* NSData+GZIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+GZIP.m"; sourceTree = "<group>"; };
 		AF439FDE1DB87C440039E885 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -100,8 +97,6 @@
 		AF439FD01DB87B700039E885 /* WISP */ = {
 			isa = PBXGroup;
 			children = (
-				AF439FDA1DB87C440039E885 /* CLLocationManager+Simulator.h */,
-				AF439FDB1DB87C440039E885 /* CLLocationManager+Simulator.m */,
 				AF439FDC1DB87C440039E885 /* NSData+GZIP.h */,
 				AF439FDD1DB87C440039E885 /* NSData+GZIP.m */,
 				AF439FDE1DB87C440039E885 /* Reachability.h */,
@@ -233,7 +228,6 @@
 				AF439FF51DB87C440039E885 /* WISPURLProtocol.m in Sources */,
 				AF439FF01DB87C440039E885 /* Reachability.m in Sources */,
 				AF439FF61DB87C440039E885 /* WISPURLProtocol+report.m in Sources */,
-				AF439FEE1DB87C440039E885 /* CLLocationManager+Simulator.m in Sources */,
 				AF439FF21DB87C440039E885 /* WISPSysDetector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
