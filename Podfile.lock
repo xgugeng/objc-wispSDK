@@ -1,0 +1,35 @@
+PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - HappyDNS (0.3.10)
+  - MSWeakTimer (1.1.0)
+  - SAMKeychain (1.5.2)
+
+DEPENDENCIES:
+  - AFNetworking (~> 3.0)
+  - HappyDNS (~> 0.3.0)
+  - MSWeakTimer (~> 1.1.0)
+  - SAMKeychain (~> 1.5.0)
+
+SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
+  MSWeakTimer: 9426150f933b80ed3acf3f6d228e4b61f0e303c8
+  SAMKeychain: 1865333198217411f35327e8da61b43de79b635b
+
+PODFILE CHECKSUM: 3b55364ad4c72c69a795b8026cc9ca5796a39d90
+
+COCOAPODS: 1.0.1

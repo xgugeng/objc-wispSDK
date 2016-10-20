@@ -1,0 +1,366 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6647E602005244EFCC1B8567 /* libPods-objc-wispSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B8CB6D988628B43C8C24B6 /* libPods-objc-wispSDK.a */; };
+		AF439FEE1DB87C440039E885 /* CLLocationManager+Simulator.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FDB1DB87C440039E885 /* CLLocationManager+Simulator.m */; settings = {ASSET_TAGS = (); }; };
+		AF439FEF1DB87C440039E885 /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FDD1DB87C440039E885 /* NSData+GZIP.m */; settings = {ASSET_TAGS = (); }; };
+		AF439FF01DB87C440039E885 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FDF1DB87C440039E885 /* Reachability.m */; settings = {ASSET_TAGS = (); }; };
+		AF439FF11DB87C440039E885 /* WISPLocationMgrDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FE11DB87C440039E885 /* WISPLocationMgrDelegate.m */; settings = {ASSET_TAGS = (); }; };
+		AF439FF21DB87C440039E885 /* WISPSysDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FE31DB87C440039E885 /* WISPSysDetector.m */; settings = {ASSET_TAGS = (); }; };
+		AF439FF31DB87C440039E885 /* WISPURLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FE51DB87C440039E885 /* WISPURLModel.m */; settings = {ASSET_TAGS = (); }; };
+		AF439FF41DB87C440039E885 /* WISPURLModelMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FE71DB87C440039E885 /* WISPURLModelMgr.m */; settings = {ASSET_TAGS = (); }; };
+		AF439FF51DB87C440039E885 /* WISPURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FE91DB87C440039E885 /* WISPURLProtocol.m */; settings = {ASSET_TAGS = (); }; };
+		AF439FF61DB87C440039E885 /* WISPURLProtocol+report.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FEB1DB87C440039E885 /* WISPURLProtocol+report.m */; settings = {ASSET_TAGS = (); }; };
+		AF439FF71DB87C440039E885 /* WISPURLSessionConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FED1DB87C440039E885 /* WISPURLSessionConfiguration.m */; settings = {ASSET_TAGS = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AF439FCC1DB87B700039E885 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		13A727D97BDCEE17ECFC42EB /* Pods-objc-wispSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objc-wispSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-objc-wispSDK/Pods-objc-wispSDK.release.xcconfig"; sourceTree = "<group>"; };
+		AF439FCE1DB87B700039E885 /* libobjc-wispSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libobjc-wispSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF439FDA1DB87C440039E885 /* CLLocationManager+Simulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocationManager+Simulator.h"; sourceTree = "<group>"; };
+		AF439FDB1DB87C440039E885 /* CLLocationManager+Simulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocationManager+Simulator.m"; sourceTree = "<group>"; };
+		AF439FDC1DB87C440039E885 /* NSData+GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+GZIP.h"; sourceTree = "<group>"; };
+		AF439FDD1DB87C440039E885 /* NSData+GZIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+GZIP.m"; sourceTree = "<group>"; };
+		AF439FDE1DB87C440039E885 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		AF439FDF1DB87C440039E885 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		AF439FE01DB87C440039E885 /* WISPLocationMgrDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WISPLocationMgrDelegate.h; sourceTree = "<group>"; };
+		AF439FE11DB87C440039E885 /* WISPLocationMgrDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WISPLocationMgrDelegate.m; sourceTree = "<group>"; };
+		AF439FE21DB87C440039E885 /* WISPSysDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WISPSysDetector.h; sourceTree = "<group>"; };
+		AF439FE31DB87C440039E885 /* WISPSysDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WISPSysDetector.m; sourceTree = "<group>"; };
+		AF439FE41DB87C440039E885 /* WISPURLModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WISPURLModel.h; sourceTree = "<group>"; };
+		AF439FE51DB87C440039E885 /* WISPURLModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WISPURLModel.m; sourceTree = "<group>"; };
+		AF439FE61DB87C440039E885 /* WISPURLModelMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WISPURLModelMgr.h; sourceTree = "<group>"; };
+		AF439FE71DB87C440039E885 /* WISPURLModelMgr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WISPURLModelMgr.m; sourceTree = "<group>"; };
+		AF439FE81DB87C440039E885 /* WISPURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WISPURLProtocol.h; sourceTree = "<group>"; };
+		AF439FE91DB87C440039E885 /* WISPURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WISPURLProtocol.m; sourceTree = "<group>"; };
+		AF439FEA1DB87C440039E885 /* WISPURLProtocol+report.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WISPURLProtocol+report.h"; sourceTree = "<group>"; };
+		AF439FEB1DB87C440039E885 /* WISPURLProtocol+report.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WISPURLProtocol+report.m"; sourceTree = "<group>"; };
+		AF439FEC1DB87C440039E885 /* WISPURLSessionConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WISPURLSessionConfiguration.h; sourceTree = "<group>"; };
+		AF439FED1DB87C440039E885 /* WISPURLSessionConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WISPURLSessionConfiguration.m; sourceTree = "<group>"; };
+		B5B8CB6D988628B43C8C24B6 /* libPods-objc-wispSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-objc-wispSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4E6B6768B07D464586729F4 /* Pods-objc-wispSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objc-wispSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-objc-wispSDK/Pods-objc-wispSDK.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AF439FCB1DB87B700039E885 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6647E602005244EFCC1B8567 /* libPods-objc-wispSDK.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		59A7B27438DAE631DCD836F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B5B8CB6D988628B43C8C24B6 /* libPods-objc-wispSDK.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AF439FC51DB87B700039E885 = {
+			isa = PBXGroup;
+			children = (
+				AF439FD01DB87B700039E885 /* WISP */,
+				AF439FCF1DB87B700039E885 /* Products */,
+				ED10A09F5ADD78EE076EE58E /* Pods */,
+				59A7B27438DAE631DCD836F5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		AF439FCF1DB87B700039E885 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AF439FCE1DB87B700039E885 /* libobjc-wispSDK.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AF439FD01DB87B700039E885 /* WISP */ = {
+			isa = PBXGroup;
+			children = (
+				AF439FDA1DB87C440039E885 /* CLLocationManager+Simulator.h */,
+				AF439FDB1DB87C440039E885 /* CLLocationManager+Simulator.m */,
+				AF439FDC1DB87C440039E885 /* NSData+GZIP.h */,
+				AF439FDD1DB87C440039E885 /* NSData+GZIP.m */,
+				AF439FDE1DB87C440039E885 /* Reachability.h */,
+				AF439FDF1DB87C440039E885 /* Reachability.m */,
+				AF439FE01DB87C440039E885 /* WISPLocationMgrDelegate.h */,
+				AF439FE11DB87C440039E885 /* WISPLocationMgrDelegate.m */,
+				AF439FE21DB87C440039E885 /* WISPSysDetector.h */,
+				AF439FE31DB87C440039E885 /* WISPSysDetector.m */,
+				AF439FE41DB87C440039E885 /* WISPURLModel.h */,
+				AF439FE51DB87C440039E885 /* WISPURLModel.m */,
+				AF439FE61DB87C440039E885 /* WISPURLModelMgr.h */,
+				AF439FE71DB87C440039E885 /* WISPURLModelMgr.m */,
+				AF439FE81DB87C440039E885 /* WISPURLProtocol.h */,
+				AF439FE91DB87C440039E885 /* WISPURLProtocol.m */,
+				AF439FEA1DB87C440039E885 /* WISPURLProtocol+report.h */,
+				AF439FEB1DB87C440039E885 /* WISPURLProtocol+report.m */,
+				AF439FEC1DB87C440039E885 /* WISPURLSessionConfiguration.h */,
+				AF439FED1DB87C440039E885 /* WISPURLSessionConfiguration.m */,
+			);
+			name = WISP;
+			path = "objc-wispSDK";
+			sourceTree = "<group>";
+		};
+		ED10A09F5ADD78EE076EE58E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E4E6B6768B07D464586729F4 /* Pods-objc-wispSDK.debug.xcconfig */,
+				13A727D97BDCEE17ECFC42EB /* Pods-objc-wispSDK.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AF439FCD1DB87B700039E885 /* objc-wispSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF439FD71DB87B700039E885 /* Build configuration list for PBXNativeTarget "objc-wispSDK" */;
+			buildPhases = (
+				B3CDB271C90F06AA60F15E37 /* [CP] Check Pods Manifest.lock */,
+				AF439FCA1DB87B700039E885 /* Sources */,
+				AF439FCB1DB87B700039E885 /* Frameworks */,
+				AF439FCC1DB87B700039E885 /* CopyFiles */,
+				F31E8646951AA2A78BC1E238 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "objc-wispSDK";
+			productName = "objc-wispSDK";
+			productReference = AF439FCE1DB87B700039E885 /* libobjc-wispSDK.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AF439FC61DB87B700039E885 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = qiniu;
+				TargetAttributes = {
+					AF439FCD1DB87B700039E885 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
+			};
+			buildConfigurationList = AF439FC91DB87B700039E885 /* Build configuration list for PBXProject "objc-wispSDK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AF439FC51DB87B700039E885;
+			productRefGroup = AF439FCF1DB87B700039E885 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AF439FCD1DB87B700039E885 /* objc-wispSDK */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B3CDB271C90F06AA60F15E37 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F31E8646951AA2A78BC1E238 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-objc-wispSDK/Pods-objc-wispSDK-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AF439FCA1DB87B700039E885 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF439FF31DB87C440039E885 /* WISPURLModel.m in Sources */,
+				AF439FEF1DB87C440039E885 /* NSData+GZIP.m in Sources */,
+				AF439FF11DB87C440039E885 /* WISPLocationMgrDelegate.m in Sources */,
+				AF439FF41DB87C440039E885 /* WISPURLModelMgr.m in Sources */,
+				AF439FF71DB87C440039E885 /* WISPURLSessionConfiguration.m in Sources */,
+				AF439FF51DB87C440039E885 /* WISPURLProtocol.m in Sources */,
+				AF439FF01DB87C440039E885 /* Reachability.m in Sources */,
+				AF439FF61DB87C440039E885 /* WISPURLProtocol+report.m in Sources */,
+				AF439FEE1DB87C440039E885 /* CLLocationManager+Simulator.m in Sources */,
+				AF439FF21DB87C440039E885 /* WISPSysDetector.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AF439FD51DB87B700039E885 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AF439FD61DB87B700039E885 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AF439FD81DB87B700039E885 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4E6B6768B07D464586729F4 /* Pods-objc-wispSDK.debug.xcconfig */;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AF439FD91DB87B700039E885 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 13A727D97BDCEE17ECFC42EB /* Pods-objc-wispSDK.release.xcconfig */;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AF439FC91DB87B700039E885 /* Build configuration list for PBXProject "objc-wispSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF439FD51DB87B700039E885 /* Debug */,
+				AF439FD61DB87B700039E885 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AF439FD71DB87B700039E885 /* Build configuration list for PBXNativeTarget "objc-wispSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF439FD81DB87B700039E885 /* Debug */,
+				AF439FD91DB87B700039E885 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AF439FC61DB87B700039E885 /* Project object */;
+}
