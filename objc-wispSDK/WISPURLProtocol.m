@@ -24,6 +24,7 @@ NSInteger const WISPSuccStatusCode = 200;
 
 static int sWISPVersion = 0;
 static int sWISPFreq = 0;
+static bool sWISPDns = false;
 static NSString *sAppID;
 static NSString *sAppKey;
 static NSMutableArray *sWISPPermitDomains;
@@ -149,7 +150,7 @@ static MSWeakTimer *sWISPTimer;
                         forKey:@"WISPURLProtocol"
                      inRequest:mutableRequest];
     
-    if ([mutableRequest.URL.scheme isEqualToString:@"http"]) {
+    if (sWISPDns && [mutableRequest.URL.scheme isEqualToString:@"http"]) {
         NSMutableArray *resolvers = [[NSMutableArray alloc] init];
         [resolvers addObject:[QNResolver systemResolver]];
         [resolvers addObject:[[QNResolver alloc] initWithAddress:@"119.29.29.29"]];
@@ -291,6 +292,7 @@ didReceiveResponse:(NSURLResponse *)response {
             NSDictionary *appDict = [resDict valueForKey:@"app"];
             sWISPVersion = [[appDict valueForKey:@"version"] intValue];
             sWISPFreq = [[appDict valueForKey:@"freq"] intValue];
+            sWISPDns = [[appDict valueForKey:@"dns"] boolValue];
             NSArray *permitDomains = [appDict valueForKey:@"permitDomains"];
             for (id item in permitDomains) {
                 [sWISPPermitDomains addObject:[(NSDictionary*)item valueForKey:@"domain"]];
@@ -301,7 +303,7 @@ didReceiveResponse:(NSURLResponse *)response {
                 [sWISPForbidDomains addObject:[(NSDictionary*)item valueForKey:@"domain"]];
             }
 
-            sWISPTimer = [MSWeakTimer scheduledTimerWithTimeInterval:sWISPFreq*5
+            sWISPTimer = [MSWeakTimer scheduledTimerWithTimeInterval:sWISPFreq * 60
                                                               target:self
                                                             selector:@selector(sendReport)
                                                             userInfo:nil
