@@ -103,6 +103,24 @@ static MSWeakTimer *sWISPTimer;
     }
     
     NSString *host = request.URL.host;
+    
+    // 检查黑名单
+    for (NSString *domain in sWISPForbidDomains) {
+        if ([domain hasPrefix:@"*."]) { // 泛域名
+            // 去掉开头星号
+            NSString *suffixDomain = [domain substringFromIndex:1];
+            if ([host hasSuffix:suffixDomain]) {
+                return NO;
+            }
+        }
+        else {  // 域名
+            if ([host isEqualToString:domain]) {
+                return NO;
+            }
+        }
+    }
+    
+    // 检查白名单
     for (NSString *domain in sWISPPermitDomains) {
         if ([domain hasPrefix:@"*."]) { // 泛域名
             // 去掉开头星号
@@ -116,7 +134,6 @@ static MSWeakTimer *sWISPTimer;
                 return YES;
             }
         }
-
     }
     
     return NO;
@@ -274,9 +291,14 @@ didReceiveResponse:(NSURLResponse *)response {
             NSDictionary *appDict = [resDict valueForKey:@"app"];
             sWISPVersion = [[appDict valueForKey:@"version"] intValue];
             sWISPFreq = [[appDict valueForKey:@"freq"] intValue];
-            NSArray *domains = [appDict valueForKey:@"permitDomains"];
-            for (id item in domains) {
+            NSArray *permitDomains = [appDict valueForKey:@"permitDomains"];
+            for (id item in permitDomains) {
                 [sWISPPermitDomains addObject:[(NSDictionary*)item valueForKey:@"domain"]];
+            }
+            
+            NSArray *forbidDomains = [appDict valueForKey:@"forbidDomains"];
+            for (id item in forbidDomains) {
+                [sWISPForbidDomains addObject:[(NSDictionary*)item valueForKey:@"domain"]];
             }
 
             sWISPTimer = [MSWeakTimer scheduledTimerWithTimeInterval:sWISPFreq*5
