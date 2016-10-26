@@ -17,6 +17,7 @@
 + (BOOL)isEnabled;
 + (NSString*)appID;
 + (NSString*)appKey;
++ (void)rePullConfigifNeeded:(int)newConfigVersion;
 
 @end
 

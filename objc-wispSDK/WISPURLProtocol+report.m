@@ -18,7 +18,7 @@
 #import "NSData+GZIP.h"
 
 NSString *const WISPSite = @"https://wisp.qiniu.io";
-NSString *const WISPVersion = @"0.0.2";
+NSString *const WISPSDKVersion = @"0.0.3";
 
 @implementation WISPURLProtocol (report)
 
@@ -66,7 +66,7 @@ NSString *const WISPVersion = @"0.0.2";
                                  @"DeviceProvider": machineName,
                                  @"DeviceID": deviceID,
                                  @"NetType": netStatus,
-                                 @"Version": WISPVersion,
+                                 @"Version": WISPSDKVersion,
                                  @"AppVersion": appVersion,
                                  @"AppID": appID,
                                  @"Url": url,
@@ -118,9 +118,20 @@ NSString *const WISPVersion = @"0.0.2";
                                          completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                                              if (error != nil) {
                                                  NSLog(@"send report failed: %@", error.localizedDescription);
+                                                 return;
                                              }
-                                             else {
-                                                NSLog(@"send report succ, data: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                                             
+                                             NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
+                                             NSInteger responseStatusCode = [httpResponse statusCode];
+                                             if (responseStatusCode == 200) {
+                                                 NSDictionary *resDict = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                         options:NSJSONReadingMutableContainers error:&error];
+                                                 if (error != nil) {
+                                                     return;
+                                                 }
+                                                 
+                                                 int configVersion = [[resDict valueForKey:@"version"] intValue];
+                                                 [self rePullConfigifNeeded:configVersion];
                                              }
                                          }];
     [task resume];

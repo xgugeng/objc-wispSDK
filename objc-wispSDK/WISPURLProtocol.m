@@ -22,9 +22,10 @@ NSString *const WISPEnabled = @"WISPEnable";
 NSString *const NetDiagSite = @"http://fusion-netdiag.qiniu.io";
 NSInteger const WISPSuccStatusCode = 200;
 
-static int sWISPVersion = 0;
+static BOOL sWISPConfigLoaded = NO;
+static int sWISPConfigVersion = 0;
 static int sWISPFreq = 0;
-static bool sWISPDns = false;
+static BOOL sWISPDns = NO;
 static NSString *sAppID;
 static NSString *sAppKey;
 static NSMutableArray *sWISPPermitDomains;
@@ -48,6 +49,12 @@ static MSWeakTimer *sWISPTimer;
 
 + (NSString*)appKey {
     return sAppKey;
+}
+
++ (void)rePullConfigifNeeded:(int)newConfigVersion {
+    if (newConfigVersion > sWISPConfigVersion) {
+        [self requestForConfig:sAppID];
+    }
 }
 
 + (void)enableWithAppID:(NSString *)appID
@@ -88,17 +95,24 @@ static MSWeakTimer *sWISPTimer;
 + (BOOL)isEnabled {
     return [[[NSUserDefaults standardUserDefaults] objectForKey:WISPEnabled] boolValue];
 }
+
 #pragma mark - superclass methods
 + (void)load {
     
 }
 
 + (BOOL)canInitWithRequest:(NSURLRequest *)request {
+    // 配置尚未加载
+    if (!sWISPConfigLoaded) {
+        return NO;
+    }
+    
     if (![request.URL.scheme isEqualToString:@"http"] &&
         ![request.URL.scheme isEqualToString:@"https"]) {
         return NO;
     }
     
+    // SDK主动发送的数据
     if ([NSURLProtocol propertyForKey:@"WISPURLProtocol" inRequest:request] ) {
         return NO;
     }
@@ -260,6 +274,8 @@ didReceiveResponse:(NSURLResponse *)response {
 
 #pragma mark - Utils
 + (void)requestForConfig:(NSString *)appID {
+    sWISPConfigLoaded = NO;
+    
     sWISPForbidDomains = [NSMutableArray arrayWithCapacity:1];
     sWISPPermitDomains = [NSMutableArray arrayWithCapacity:1];
     
@@ -290,7 +306,7 @@ didReceiveResponse:(NSURLResponse *)response {
                 return;
             }
             NSDictionary *appDict = [resDict valueForKey:@"app"];
-            sWISPVersion = [[appDict valueForKey:@"version"] intValue];
+            sWISPConfigVersion = [[appDict valueForKey:@"version"] intValue];
             sWISPFreq = [[appDict valueForKey:@"freq"] intValue];
             sWISPDns = [[appDict valueForKey:@"dns"] boolValue];
             NSArray *permitDomains = [appDict valueForKey:@"permitDomains"];
@@ -309,6 +325,7 @@ didReceiveResponse:(NSURLResponse *)response {
                                                             userInfo:nil
                                                              repeats:YES
                                                        dispatchQueue:dispatch_get_main_queue()];
+            sWISPConfigLoaded = YES;
         }
     }];
     [task resume];
