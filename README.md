@@ -19,12 +19,15 @@
 
 这里有一个[简单的例子](https://github.com/hellokangning/wispSample)。
 
-### Podfile
+### 1. Podfile
 
 ```ruby
 platform :ios, '7.0'
-pod 'NetworkEye', '~> 1.0.1'
+pod 'QiniuWISP', '~> 0.0.3'
 ```
+
+### 2. 手动
+将[objc-wispSDK](https://github.com/hellokangning/objc-wispSDK/tree/master/objc-wispSDK)目录下的源文件（.h和.m）拷贝到自己的项目中。
 
 使用例子：
 
