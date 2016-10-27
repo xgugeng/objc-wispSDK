@@ -123,10 +123,16 @@ NSString *const WISPSDKVersion = @"0.0.3";
                                              
                                              NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
                                              NSInteger responseStatusCode = [httpResponse statusCode];
-                                             if (responseStatusCode == 200) {
+                                             const NSInteger responseSuccCode = 200;
+                                             if (responseStatusCode == responseSuccCode) {
                                                  NSDictionary *resDict = [NSJSONSerialization JSONObjectWithData:data
                                                                                                          options:NSJSONReadingMutableContainers error:&error];
                                                  if (error != nil) {
+                                                     return;
+                                                 }
+                                                 
+                                                 NSInteger statusCode = [[resDict valueForKey:@"status"] integerValue];
+                                                 if (statusCode != responseSuccCode) {
                                                      return;
                                                  }
                                                  
