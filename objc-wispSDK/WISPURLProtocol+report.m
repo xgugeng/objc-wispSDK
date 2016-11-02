@@ -18,7 +18,7 @@
 #import "NSData+GZIP.h"
 
 NSString *const WISPSite = @"https://wisp.qiniu.io";
-NSString *const WISPSDKVersion = @"0.0.3";
+NSString *const WISPSDKVersion = @"0.1.3";
 
 @implementation WISPURLProtocol (report)
 
