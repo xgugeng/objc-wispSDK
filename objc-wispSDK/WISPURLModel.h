@@ -15,6 +15,7 @@
 @property (nonatomic, strong, nonnull) NSHTTPURLResponse *response;
 @property (nonatomic, assign) double myID;
 @property (nonatomic, assign) UInt64 startTimestamp;
+@property (nonatomic, assign) UInt64 startTimestampViaMin;
 @property (nonatomic, assign) UInt64 endTimestamp;
 @property (nonatomic, strong, nonnull) NSString *errMsg;
 
@@ -24,12 +25,16 @@
 @property (nonatomic, assign) double requestTimeoutInterval;
 @property (nonatomic, strong, nonnull) NSString *requestHTTPMethod;
 @property (nonatomic, strong, nonnull) NSString *requestHostIP;
+@property (nonatomic, assign) UInt8 requestDomainType;
+@property (nonatomic, assign) UInt8 requestGroupType;
+@property (nonatomic, strong, nonnull) NSString *requestGroupPath;
 
 //response
 @property (nonatomic, assign) int responseStatusCode;
 @property (nonatomic, assign) UInt64 responseTimeStamp;
 @property (nonatomic, assign) UInt64 dnsTime;
 @property (nonatomic, assign) NSInteger responseDataLength;
+@property (nonatomic, strong, nonnull) NSString *responseMIME;
 
 @end
 

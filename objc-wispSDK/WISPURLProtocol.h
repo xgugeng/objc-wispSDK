@@ -9,6 +9,9 @@
 #ifndef WISPURLProtocol_h
 #define WISPURLProtocol_h
 
+@interface WISPPermitDomainType : NSObject
+@end
+
 @interface WISPURLProtocol : NSURLProtocol
 
 + (void)enableWithAppID:(NSString*)appID

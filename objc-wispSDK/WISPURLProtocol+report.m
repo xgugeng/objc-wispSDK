@@ -18,75 +18,43 @@
 #import "NSData+GZIP.h"
 
 NSString *const WISPSite = @"https://wisp.qiniu.io";
-NSString *const WISPSDKVersion = @"0.1.4";
+NSString *const WISPSDKVersion = @"0.2.4";
 
 @implementation WISPURLProtocol (report)
 
 + (void)sendReport {
-    NSMutableArray *requests = [[WISPURLModelMgr defaultManager] allModels];
-    if (requests == nil || [requests count] == 0) {
+    NSString *groupData = [[WISPURLModelMgr defaultManager] groupDataString];
+    NSString *errorData = [[WISPURLModelMgr defaultManager] errorDataString];
+    
+    if ([groupData isEqualToString:@""]
+        && [errorData isEqualToString:@""]) {
         return;
     }
-    
-    NSMutableArray *reports = [NSMutableArray arrayWithCapacity:[requests count]];
     
     WISPSysDetector *sysDetector = [WISPSysDetector defaultDetector];
     NSString *sysName = [sysDetector systemName];
     NSString *sysVersion = [sysDetector systemVersion];
     NSString *machineName = [sysDetector machineName];
     NSString *deviceID = [sysDetector UUIDString];
+    NSString *simType = [sysDetector simType];
     NSString *netStatus = [sysDetector netStatus];
-    
     NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    
     NSString *appID = [self appID];
-    for (WISPURLModel *req in requests) {
-        NSString *url = req.requestURLString;
-        NSString *domain = req.requestDomain;
-        NSString *hostIP = req.requestHostIP;
-        UInt64 sendTime = req.startTimestamp;
-        UInt64 dnsTime = req.dnsTime;
-        
-        SInt64 firstResTime = (req.responseTimeStamp > sendTime) ? (req.responseTimeStamp - sendTime) : -1;
-        SInt64 dataLen = req.responseDataLength;
-        SInt64 dlTime = (req.endTimestamp > sendTime) ? (req.endTimestamp - sendTime) : -1;
-        int statusCode = req.responseStatusCode;
-        NSString *msg = req.errMsg;
-        if (msg == nil) {
-            msg = @"";
-        }
-       
-        BOOL reachable = YES;
-        if (statusCode != 200 || ![msg isEqualToString:@""])
-            reachable = NO;
-        
-        NSDictionary *report = @{
-                                 @"Os": sysName,
-                                 @"SysVersion": sysVersion,
-                                 @"DeviceProvider": machineName,
-                                 @"DeviceID": deviceID,
-                                 @"NetType": netStatus,
-                                 @"Version": WISPSDKVersion,
-                                 @"AppVersion": appVersion,
-                                 @"AppID": appID,
-                                 @"Url": url,
-                                 @"Domain": domain,
-                                 @"HostIp": hostIP,
-                                 @"Stime": [NSNumber numberWithLongLong:sendTime],
-                                 @"DnsTime": [NSNumber numberWithLongLong:dnsTime],
-                                 @"FirstPacketTime": [NSNumber numberWithLongLong:firstResTime],
-                                 @"Size": [NSNumber numberWithLongLong:dataLen],
-                                 @"TotalTime": [NSNumber numberWithLongLong:dlTime],
-                                 @"Code": [NSNumber numberWithInt:statusCode],
-                                 @"Reachable": [NSNumber numberWithBool:reachable],
-                                 @"Message": msg
-                                 };
-        [reports addObject:report];
-    }
-   
+    
     NSDictionary *data = @{
-                           @"data": reports
+                           @"Os": sysName,
+                           @"SysVersion": sysVersion,
+                           @"DeviceProvider": machineName,
+                           @"DeviceID": deviceID,
+                           @"simType": simType,
+                           @"NetType": netStatus,
+                           @"Version": WISPSDKVersion,
+                           @"AppVersion": appVersion,
+                           @"AppID": appID,
+                           @"groupData": groupData,
+                           @"errorData": errorData,
                            };
+    
     NSError *writeError = nil;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data
                                                        options:NSJSONWritingPrettyPrinted
@@ -98,7 +66,7 @@ NSString *const WISPSDKVersion = @"0.1.4";
     
     NSData *gzippedData = [jsonData gzippedData];
     NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)gzippedData.length];
-   
+    
     NSURL *url = [self reportURL];
     NSMutableURLRequest *mutableRequest = [NSMutableURLRequest requestWithURL:url];
     [mutableRequest setHTTPMethod:@"POST"];
@@ -141,13 +109,13 @@ NSString *const WISPSDKVersion = @"0.1.4";
                                              }
                                          }];
     [task resume];
-  
+    
     [[WISPURLModelMgr defaultManager] removeAllModels];
 }
 
 + (NSURL*)reportURL {
     NSString *site = [WISPSite mutableCopy];
-    NSString *path = @"/webapi/fusion/encodingLogs";
+    NSString *path = @"/webapi/fusion/encodingGroupLogs";
     UInt64 timeStamp = [[NSDate date] timeIntervalSince1970] * 1000;
     
     NSString *tobeSigned = [path stringByAppendingFormat:@"%@%llu%@", [self appID], timeStamp, [self appKey]];

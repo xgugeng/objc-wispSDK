@@ -11,11 +11,18 @@
 
 @class WISPURLModel;
 
+@interface WISPGroupData : NSObject
+@end
+
+@interface WISPErrorData : NSObject
+@end
+
 @interface WISPURLModelMgr : NSObject
 + (WISPURLModelMgr *)defaultManager;
 - (void)addModel:(WISPURLModel*)newModel;
 - (void)removeAllModels;
-- (NSMutableArray *)allModels;
+- (NSString *)groupDataString;
+- (NSString *)errorDataString;
 @end
 
 

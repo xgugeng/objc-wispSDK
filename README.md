@@ -23,7 +23,7 @@
 
 ```ruby
 platform :ios, '7.0'
-pod 'QiniuWISP', '~> 0.1.4'
+pod 'QiniuWISP', '~> 0.2.4'
 ```
 
 ### 2. 手动

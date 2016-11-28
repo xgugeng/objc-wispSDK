@@ -28,15 +28,36 @@ static int sWISPFreq = 0;
 static BOOL sWISPDns = NO;
 static NSString *sAppID;
 static NSString *sAppKey;
-static NSMutableArray *sWISPPermitDomains;
+static NSMutableDictionary *sWISPPermitDomainDict;
 static NSMutableArray *sWISPForbidDomains;
 static MSWeakTimer *sWISPTimer;
 
+enum WISPDomainGroupType {
+    eWISPDomainGroupTypeDomain = 0,
+    eWISPDomainGroupTypeSuffix,
+    eWISPDomainGroupTypePath,
+    eWISPDomainGroupTypeMIME
+};
+
+# pragma mark - WISPPermitDomainType
+@interface WISPPermitDomainType()
+{}
+
+@property (nonatomic, assign) UInt8 domainType;
+@property (nonatomic, assign) UInt8 groupType;
+
+@end
+
+@implementation WISPPermitDomainType
+
+@end
+
+# pragma mark - WISPURLProtocol
 @interface WISPURLProtocol ()<NSURLConnectionDelegate, NSURLConnectionDataDelegate>
 {}
 @property (nonatomic, strong) NSURLConnection *connection;
 @property (nonatomic, strong) NSURLResponse *response;
-@property (nonatomic,strong) WISPURLModel *URLModel;
+@property (nonatomic, strong) WISPURLModel *URLModel;
 @end
 
 @implementation WISPURLProtocol
@@ -85,7 +106,7 @@ static MSWeakTimer *sWISPTimer;
         [sessionConfiguration unload];
     }
     
-    sWISPPermitDomains = nil;
+    sWISPPermitDomainDict = nil;
     sWISPForbidDomains = nil;
     [sWISPTimer invalidate];
     sWISPTimer = nil;
@@ -127,8 +148,7 @@ static MSWeakTimer *sWISPTimer;
             if ([host hasSuffix:suffixDomain]) {
                 return NO;
             }
-        }
-        else {  // 域名
+        } else {  // 域名
             if ([host isEqualToString:domain]) {
                 return NO;
             }
@@ -136,7 +156,7 @@ static MSWeakTimer *sWISPTimer;
     }
     
     // 检查白名单
-    for (NSString *domain in sWISPPermitDomains) {
+    for (NSString *domain in sWISPPermitDomainDict) {
         if ([domain hasPrefix:@"*."]) { // 泛域名
             // 去掉开头星号
             NSString *suffixDomain = [domain substringFromIndex:1];
@@ -195,9 +215,33 @@ static MSWeakTimer *sWISPTimer;
     
     URLModel = [[WISPURLModel alloc] init];
     URLModel.request = self.request;
+    URLModel.startTimestampViaMin = ((int)[[NSDate date] timeIntervalSince1970]) / 60 * 60;
     URLModel.startTimestamp = [[NSDate date] timeIntervalSince1970] * 1000;
+    
     URLModel.responseTimeStamp = 0;
     URLModel.responseDataLength = 0;
+    
+    WISPPermitDomainType *type = [self typeForDomain:URLModel.requestDomain];
+    URLModel.requestDomainType = type.domainType;
+    URLModel.requestGroupType = type.groupType;
+    switch (URLModel.requestGroupType) {
+        case eWISPDomainGroupTypeDomain:
+            URLModel.requestGroupPath = @"/";
+            break;
+            
+        case eWISPDomainGroupTypeSuffix:
+        {
+            NSString *lastPath = [[self.request URL] lastPathComponent];
+            URLModel.requestGroupPath = [NSString stringWithFormat:@".%@", [lastPath pathExtension]];
+            break;
+        }
+            
+        case eWISPDomainGroupTypePath:
+            URLModel.requestGroupPath = [[self.request URL] relativePath];
+        default:
+            break;
+    }
+    
     
     NSTimeInterval myID = [[NSDate date] timeIntervalSince1970];
     double randomNum = ((double)(arc4random() % 100))/10000;
@@ -214,7 +258,15 @@ static MSWeakTimer *sWISPTimer;
 - (void)connection:(NSURLConnection *)connection
   didFailWithError:(NSError *)error {
     URLModel.responseStatusCode = (int)error.code;
-    URLModel.errMsg = error.localizedDescription;
+    URLModel.errMsg = error.localizedDescription;;
+    URLModel.responseMIME = [self.response MIMEType];
+    switch (URLModel.requestGroupType) {
+        case eWISPDomainGroupTypeMIME:
+            URLModel.requestGroupPath = URLModel.responseMIME;
+            break;
+        default:
+            break;
+    }
     [[WISPURLModelMgr defaultManager] addModel:URLModel];
     [[self client] URLProtocol:self didFailWithError:error];
 }
@@ -267,6 +319,15 @@ didReceiveResponse:(NSURLResponse *)response {
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    URLModel.responseStatusCode = (int)[(NSHTTPURLResponse*)self.response statusCode];
+    URLModel.responseMIME = [self.response MIMEType];
+    switch (URLModel.requestGroupType) {
+        case eWISPDomainGroupTypeMIME:
+            URLModel.requestGroupPath = URLModel.responseMIME;
+            break;
+        default:
+            break;
+    }
     [[WISPURLModelMgr defaultManager] addModel:URLModel];
     
     [[self client] URLProtocolDidFinishLoading:self];
@@ -277,7 +338,7 @@ didReceiveResponse:(NSURLResponse *)response {
     sWISPConfigLoaded = NO;
     
     sWISPForbidDomains = [NSMutableArray arrayWithCapacity:1];
-    sWISPPermitDomains = [NSMutableArray arrayWithCapacity:1];
+    sWISPPermitDomainDict = [NSMutableDictionary dictionary];
     
     NSString *site = [NetDiagSite mutableCopy];
     NSString *urlString = [site stringByAppendingFormat:@"/webapi/fusion/app?id=%@", appID];
@@ -291,44 +352,68 @@ didReceiveResponse:(NSURLResponse *)response {
     
     NSURLSessionTask * task = [session dataTaskWithRequest:mutableRequest
                                          completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error != nil) {
-            return;
-        }
-        
-        NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-        NSInteger responseStatusCode = [httpResponse statusCode];
-        if (responseStatusCode == WISPSuccStatusCode) {
-            NSDictionary *resDict = [NSJSONSerialization
-                                  JSONObjectWithData:data
-                                  options:NSJSONReadingMutableContainers
-                                  error:&error];
-            if (error) {
-                return;
-            }
-            NSDictionary *appDict = [resDict valueForKey:@"app"];
-            sWISPConfigVersion = [[appDict valueForKey:@"version"] intValue];
-            sWISPFreq = [[appDict valueForKey:@"freq"] intValue];
-            sWISPDns = [[appDict valueForKey:@"dns"] boolValue];
-            NSArray *permitDomains = [appDict valueForKey:@"permitDomains"];
-            for (id item in permitDomains) {
-                [sWISPPermitDomains addObject:[(NSDictionary*)item valueForKey:@"domain"]];
-            }
-            
-            NSArray *forbidDomains = [appDict valueForKey:@"forbidDomains"];
-            for (id item in forbidDomains) {
-                [sWISPForbidDomains addObject:[(NSDictionary*)item valueForKey:@"domain"]];
-            }
-
-            sWISPTimer = [MSWeakTimer scheduledTimerWithTimeInterval:sWISPFreq * 60
-                                                              target:self
-                                                            selector:@selector(sendReport)
-                                                            userInfo:nil
-                                                             repeats:YES
-                                                       dispatchQueue:dispatch_get_main_queue()];
-            sWISPConfigLoaded = YES;
-        }
-    }];
+                                             if (error != nil) {
+                                                 return;
+                                             }
+                                             
+                                             NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+                                             NSInteger responseStatusCode = [httpResponse statusCode];
+                                             if (responseStatusCode == WISPSuccStatusCode) {
+                                                 NSDictionary *resDict = [NSJSONSerialization
+                                                                          JSONObjectWithData:data
+                                                                          options:NSJSONReadingMutableContainers
+                                                                          error:&error];
+                                                 if (error) {
+                                                     return;
+                                                 }
+                                                 NSDictionary *appDict = [resDict valueForKey:@"app"];
+                                                 sWISPConfigVersion = [[appDict valueForKey:@"version"] intValue];
+                                                 sWISPFreq = [[appDict valueForKey:@"freq"] intValue];
+                                                 sWISPDns = [[appDict valueForKey:@"dns"] boolValue];
+                                                 NSArray *permitDomains = [appDict valueForKey:@"permitDomains"];
+                                                 for (id item in permitDomains) {
+                                                     WISPPermitDomainType *wispDomain = [[WISPPermitDomainType alloc] init];
+                                                     wispDomain.domainType = (UInt8)[[(NSDictionary*)item valueForKey:@"type"] unsignedCharValue];
+                                                     wispDomain.groupType = (UInt8)[[(NSDictionary*)item valueForKey:@"groupType"] unsignedCharValue];
+                                                     NSString *domain = [(NSDictionary*)item valueForKey:@"domain"];
+                                                     [sWISPPermitDomainDict setValue:wispDomain forKey:domain];
+                                                 }
+                                                 
+                                                 NSArray *forbidDomains = [appDict valueForKey:@"forbidDomains"];
+                                                 for (id item in forbidDomains) {
+                                                     [sWISPForbidDomains addObject:[(NSDictionary*)item valueForKey:@"domain"]];
+                                                 }
+                                                 
+                                                 sWISPTimer = [MSWeakTimer scheduledTimerWithTimeInterval:sWISPFreq * 60
+                                                                                                   target:self
+                                                                                                 selector:@selector(sendReport)
+                                                                                                 userInfo:nil
+                                                                                                  repeats:YES
+                                                                                            dispatchQueue:dispatch_get_main_queue()];
+                                                 sWISPConfigLoaded = YES;
+                                             }
+                                         }];
     [task resume];
+}
+
+- (WISPPermitDomainType *) typeForDomain: (NSString *)domain {
+    for (NSString *permitDomain in sWISPPermitDomainDict) {
+        // 泛域名
+        if ([permitDomain hasPrefix:@"*."]) {
+            // 去掉开头星号
+            NSString *suffixDomain = [permitDomain substringFromIndex:1];
+            if ([domain hasSuffix:suffixDomain]) {
+                return [sWISPPermitDomainDict valueForKey:permitDomain];
+            }
+        } else {  // 域名
+            if ([domain isEqualToString:permitDomain]) {
+                return [sWISPPermitDomainDict valueForKey:permitDomain];
+            }
+        }
+    }
+    
+    // by default
+    return eWISPDomainGroupTypeDomain;
 }
 
 @end

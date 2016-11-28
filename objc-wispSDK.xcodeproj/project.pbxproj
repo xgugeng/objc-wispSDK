@@ -8,15 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		6647E602005244EFCC1B8567 /* libPods-objc-wispSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B8CB6D988628B43C8C24B6 /* libPods-objc-wispSDK.a */; };
-		AF439FEF1DB87C440039E885 /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FDD1DB87C440039E885 /* NSData+GZIP.m */; settings = {ASSET_TAGS = (); }; };
-		AF439FF01DB87C440039E885 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FDF1DB87C440039E885 /* Reachability.m */; settings = {ASSET_TAGS = (); }; };
-		AF439FF11DB87C440039E885 /* WISPLocationMgrDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FE11DB87C440039E885 /* WISPLocationMgrDelegate.m */; settings = {ASSET_TAGS = (); }; };
-		AF439FF21DB87C440039E885 /* WISPSysDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FE31DB87C440039E885 /* WISPSysDetector.m */; settings = {ASSET_TAGS = (); }; };
-		AF439FF31DB87C440039E885 /* WISPURLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FE51DB87C440039E885 /* WISPURLModel.m */; settings = {ASSET_TAGS = (); }; };
-		AF439FF41DB87C440039E885 /* WISPURLModelMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FE71DB87C440039E885 /* WISPURLModelMgr.m */; settings = {ASSET_TAGS = (); }; };
-		AF439FF51DB87C440039E885 /* WISPURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FE91DB87C440039E885 /* WISPURLProtocol.m */; settings = {ASSET_TAGS = (); }; };
-		AF439FF61DB87C440039E885 /* WISPURLProtocol+report.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FEB1DB87C440039E885 /* WISPURLProtocol+report.m */; settings = {ASSET_TAGS = (); }; };
-		AF439FF71DB87C440039E885 /* WISPURLSessionConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FED1DB87C440039E885 /* WISPURLSessionConfiguration.m */; settings = {ASSET_TAGS = (); }; };
+		AF439FEF1DB87C440039E885 /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FDD1DB87C440039E885 /* NSData+GZIP.m */; };
+		AF439FF01DB87C440039E885 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FDF1DB87C440039E885 /* Reachability.m */; };
+		AF439FF11DB87C440039E885 /* WISPLocationMgrDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FE11DB87C440039E885 /* WISPLocationMgrDelegate.m */; };
+		AF439FF21DB87C440039E885 /* WISPSysDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FE31DB87C440039E885 /* WISPSysDetector.m */; };
+		AF439FF31DB87C440039E885 /* WISPURLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FE51DB87C440039E885 /* WISPURLModel.m */; };
+		AF439FF41DB87C440039E885 /* WISPURLModelMgr.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FE71DB87C440039E885 /* WISPURLModelMgr.m */; };
+		AF439FF51DB87C440039E885 /* WISPURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FE91DB87C440039E885 /* WISPURLProtocol.m */; };
+		AF439FF61DB87C440039E885 /* WISPURLProtocol+report.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FEB1DB87C440039E885 /* WISPURLProtocol+report.m */; };
+		AF439FF71DB87C440039E885 /* WISPURLSessionConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = AF439FED1DB87C440039E885 /* WISPURLSessionConfiguration.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */

@@ -16,6 +16,7 @@
 @property (readonly, copy) NSString *machineName;
 @property (readonly, copy) NSString *UUIDString;
 @property (readonly, copy) NSString *netStatus;
+@property (readonly, copy) NSString *simType;
 
 + (WISPSysDetector*)defaultDetector;
 

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "QiniuWISP"
-  s.version      = "0.1.4"
+  s.version      = "0.2.4"
   s.summary      = "SDK for monitoring each HTTP/HTTPS request"
 
   s.homepage     = "https://github.com/hellokangning/objc-wispSDK.git"
